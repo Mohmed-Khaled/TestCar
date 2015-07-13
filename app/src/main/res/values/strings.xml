@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TestCar</string>
+    <string name="deviceName">HC-06</string>
+    <string name="connectButton">Connect</string>
+    <string name="buttonFL">Forward-L</string>
+    <string name="buttonF">Forward</string>
+    <string name="buttonFR">Forward-R</string>
+    <string name="buttonL">Left</string>
+    <string name="buttonS">Stop</string>
+    <string name="buttonR">Right</string>
+    <string name="buttonBL">Backward-L</string>
+    <string name="buttonB">Backward</string>
+    <string name="buttonBR">Backward-R</string>
+
+</resources>
