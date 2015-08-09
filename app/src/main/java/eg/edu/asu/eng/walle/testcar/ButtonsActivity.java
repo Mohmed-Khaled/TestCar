@@ -24,10 +24,10 @@ import java.util.UUID;
 public class ButtonsActivity extends AppCompatActivity {
     BluetoothAdapter mBluetoothAdapter;
     private Button connectButton, ForwardButton, BackButton, LeftButton, RightButton
-            ,FleftBUTTON, FrightButton, BleftButton, BrightButton;
+            ,FleftBUTTON, FrightButton, BleftButton, BrightButton, LineTrackinEn, LineTrackingDis;
 
     private Boolean Forward = false, Back = false, Left = false, Right = false,
-            FL = false, FR = false, BL = false, BR = false;
+            FL = false, FR = false, BL = false, BR = false, lineTracking = false, stopTracking = false;
 
     BluetoothSocket mmSocket;
     BluetoothDevice mmDevice;
@@ -60,6 +60,9 @@ public class ButtonsActivity extends AppCompatActivity {
         BleftButton = (Button) findViewById(R.id.buttonBL);
         BrightButton = (Button) findViewById(R.id.buttonBR);
 
+        LineTrackinEn = (Button) findViewById(R.id.EnLineTracking);
+        LineTrackingDis = (Button) findViewById(R.id.DisLineTracking);
+
         ForwardButton.setOnTouchListener(new MyTouchListener());
         BackButton.setOnTouchListener(new MyTouchListener());
         LeftButton.setOnTouchListener(new MyTouchListener());
@@ -69,6 +72,9 @@ public class ButtonsActivity extends AppCompatActivity {
         FrightButton.setOnTouchListener(new MyTouchListener());
         BleftButton.setOnTouchListener(new MyTouchListener());
         BrightButton.setOnTouchListener(new MyTouchListener());
+
+        LineTrackinEn.setOnClickListener(new StartTrackingListener());
+        LineTrackingDis.setOnClickListener(new StopTrackingListener());
     }
 
     @Override
@@ -231,7 +237,7 @@ public class ButtonsActivity extends AppCompatActivity {
     public class MyTouchListener implements View.OnTouchListener {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && lineTracking == false) {
                 // PRESSED
                 setBoolean(view,true);
                 view.setBackgroundResource(R.drawable.green_button);
@@ -245,11 +251,28 @@ public class ButtonsActivity extends AppCompatActivity {
         }
     }
 
-    public void sendChar(String Char) throws IOException {
-        try {
-            Utility.sendData(Char, mmOutputStream, getApplicationContext());
-        } catch (IOException e) {
-            e.printStackTrace();
+    public class StopTrackingListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            reset();
+            try {
+                sendChar(Utility.STOP_TRACKING);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            controlCar();
+        }
+    }
+    public class StartTrackingListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            reset();
+            try {
+                sendChar(Utility.START_TRACKING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -279,6 +302,7 @@ public class ButtonsActivity extends AppCompatActivity {
             BR = bool;
         }
     }
+
     public void controlCar() {
         if (connectButton.getText().equals("Disconnect")) {
             try {
@@ -305,5 +329,24 @@ public class ButtonsActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void sendChar(String Char) throws IOException {
+        try {
+            Utility.sendData(Char, mmOutputStream, getApplicationContext());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void reset(){
+        Forward = false;
+        Back = false;
+        Left = false;
+        Right = false;
+        FL = false;
+        FR = false;
+        BL = false;
+        BR = false;
     }
 }

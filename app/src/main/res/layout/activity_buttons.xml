@@ -37,7 +37,6 @@
                     android:text="@string/buttonFL"
                     android:layout_weight="1"
                     />
-
                 <Button
                     android:id="@+id/buttonF"
                     android:textColor="@color/white"
@@ -118,6 +117,29 @@
                     android:text="@string/buttonBR"
                     />
             </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable Tracking"
+            android:id="@+id/EnLineTracking"
+            android:textColor="@color/white"
+            android:layout_below="@id/bottom_layout"
+            android:layout_marginLeft="100dp"
+            android:background="@drawable/blue_button"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disable Tracking"
+            android:id="@+id/DisLineTracking"
+            android:textColor="@color/white"
+            android:background="@drawable/blue_button"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/EnLineTracking"
+            android:layout_toEndOf="@+id/EnLineTracking"
+            android:layout_marginLeft="49dp"
+            android:layout_marginStart="49dp" />
 
     </RelativeLayout>
 </ScrollView>
