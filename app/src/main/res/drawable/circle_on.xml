@@ -5,7 +5,7 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:shape="oval">
             <solid
-                android:color="#449def" />
+                android:color="#ff00dc3f" />
             <size
                 android:width="60dp"
                 android:height="60dp"/>

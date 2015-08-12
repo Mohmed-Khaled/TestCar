@@ -8,15 +8,17 @@
     <string name="buttonF">Forward</string>
     <string name="buttonFR">Forward-R</string>
     <string name="buttonL">Left</string>
-    <string name="buttonS">Stop</string>
+    <string name="buttonRecord">Start Recording</string>
     <string name="buttonR">Right</string>
     <string name="buttonBL">Backward-L</string>
     <string name="buttonB">Backward</string>
     <string name="buttonBR">Backward-R</string>
+    <string name="EnLineTracking">Enable Tracking</string>
+    <string name="DisLineTracking">Disable Tracking</string>
+    <string name="buttonTrack">Start Track</string>
     <string name="title_activity_buttons">Buttons</string>
     <string name="title_activity_accelerometer">Accelerometer</string>
     <string name="action_full_control">Full Control</string>
 
-    <color name="actionBar">#3F51B5</color>
 
 </resources>

@@ -76,9 +76,9 @@
                 style="@style/ButtonText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_button"
+                android:background="@drawable/red_button"
                 android:onClick="sendS"
-                android:text="@string/buttonS"
+                android:text="Stop"
                 android:layout_weight="1"
                 />
             <Button

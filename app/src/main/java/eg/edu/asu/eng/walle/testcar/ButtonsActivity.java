@@ -5,8 +5,9 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,16 +19,22 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 public class ButtonsActivity extends AppCompatActivity {
     BluetoothAdapter mBluetoothAdapter;
-    private Button connectButton, ForwardButton, BackButton, LeftButton, RightButton
-            ,FleftBUTTON, FrightButton, BleftButton, BrightButton, LineTrackinEn, LineTrackingDis;
+    private Button connectButton;
+    private Button recordButton;
+    private Button trackButton;
 
-    private Boolean Forward = false, Back = false, Left = false, Right = false,
-            FL = false, FR = false, BL = false, BR = false, lineTracking = false, stopTracking = false;
+    private Boolean forward = false, back = false, left = false, right = false,
+            FL = false, FR = false, BL = false, BR = false,
+            lineTracking = false, trackRecording = false;
+
+    private List<String> trackCommands = new ArrayList<String>();
 
     BluetoothSocket mmSocket;
     BluetoothDevice mmDevice;
@@ -50,31 +57,39 @@ public class ButtonsActivity extends AppCompatActivity {
             getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionBar)));
 
         connectButton = (Button) findViewById(R.id.connectButton);
-        ForwardButton = (Button) findViewById(R.id.buttonF);
-        BackButton = (Button) findViewById(R.id.buttonB);
-        LeftButton = (Button) findViewById(R.id.buttonL);
-        RightButton = (Button) findViewById(R.id.buttonR);
+        Button forwardButton = (Button) findViewById(R.id.buttonF);
+        Button backButton = (Button) findViewById(R.id.buttonB);
+        Button leftButton = (Button) findViewById(R.id.buttonL);
+        Button rightButton = (Button) findViewById(R.id.buttonR);
 
-        FleftBUTTON = (Button) findViewById(R.id.buttonFL);
-        FrightButton = (Button) findViewById(R.id.buttonFR);
-        BleftButton = (Button) findViewById(R.id.buttonBL);
-        BrightButton = (Button) findViewById(R.id.buttonBR);
+        Button fleftButton = (Button) findViewById(R.id.buttonFL);
+        Button fRightButton = (Button) findViewById(R.id.buttonFR);
+        Button bLeftButton = (Button) findViewById(R.id.buttonBL);
+        Button bRightButton = (Button) findViewById(R.id.buttonBR);
 
-        LineTrackinEn = (Button) findViewById(R.id.EnLineTracking);
-        LineTrackingDis = (Button) findViewById(R.id.DisLineTracking);
+        Button lineTrackingEn = (Button) findViewById(R.id.EnLineTracking);
+        Button lineTrackingDis = (Button) findViewById(R.id.DisLineTracking);
 
-        ForwardButton.setOnTouchListener(new MyTouchListener());
-        BackButton.setOnTouchListener(new MyTouchListener());
-        LeftButton.setOnTouchListener(new MyTouchListener());
-        RightButton.setOnTouchListener(new MyTouchListener());
+        recordButton = (Button) findViewById(R.id.buttonRecord);
+        trackButton = (Button) findViewById(R.id.buttonTrack);
 
-        FleftBUTTON.setOnTouchListener(new MyTouchListener());
-        FrightButton.setOnTouchListener(new MyTouchListener());
-        BleftButton.setOnTouchListener(new MyTouchListener());
-        BrightButton.setOnTouchListener(new MyTouchListener());
+        forwardButton.setOnTouchListener(new MyTouchListener());
+        backButton.setOnTouchListener(new MyTouchListener());
+        leftButton.setOnTouchListener(new MyTouchListener());
+        rightButton.setOnTouchListener(new MyTouchListener());
 
-        LineTrackinEn.setOnClickListener(new StartTrackingListener());
-        LineTrackingDis.setOnClickListener(new StopTrackingListener());
+        fleftButton.setOnTouchListener(new MyTouchListener());
+        fRightButton.setOnTouchListener(new MyTouchListener());
+        bLeftButton.setOnTouchListener(new MyTouchListener());
+        bRightButton.setOnTouchListener(new MyTouchListener());
+
+        lineTrackingEn.setOnClickListener(new StartTrackingListener());
+        lineTrackingDis.setOnClickListener(new StopTrackingListener());
+
+        recordButton.setOnClickListener(new RecordTrackListener());
+        trackButton.setOnClickListener(new StartTrackListener());
+
+
     }
 
     @Override
@@ -237,13 +252,14 @@ public class ButtonsActivity extends AppCompatActivity {
     public class MyTouchListener implements View.OnTouchListener {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN && lineTracking == false) {
+            if (motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN && !lineTracking) {
                 // PRESSED
                 setBoolean(view,true);
                 view.setBackgroundResource(R.drawable.green_button);
-            } else {
+
+            } else if (motionEvent.getActionMasked() == MotionEvent.ACTION_UP && !lineTracking) {
                 // RELEASED
-                setBoolean(view,false);
+                setBoolean(view, false);
                 view.setBackgroundResource(R.drawable.blue_button);
             }
             controlCar();
@@ -251,10 +267,24 @@ public class ButtonsActivity extends AppCompatActivity {
         }
     }
 
+    public class StartTrackingListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            reset();
+            lineTracking = true;
+            try {
+                sendChar(Utility.START_TRACKING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public class StopTrackingListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             reset();
+            lineTracking = false;
             try {
                 sendChar(Utility.STOP_TRACKING);
 
@@ -264,30 +294,67 @@ public class ButtonsActivity extends AppCompatActivity {
             controlCar();
         }
     }
-    public class StartTrackingListener implements View.OnClickListener {
+
+    public class RecordTrackListener implements View.OnClickListener{
         @Override
-        public void onClick(View view) {
-            reset();
-            try {
-                sendChar(Utility.START_TRACKING);
-            } catch (IOException e) {
-                e.printStackTrace();
+        public void onClick(View v) {
+            if(connected){
+                if(!trackRecording){
+                    trackCommands.clear();
+                    recordButton.setText("Stop Recording");
+                    recordButton.setBackgroundResource(R.drawable.red_button);
+                    trackRecording = true;
+                } else {
+                    recordButton.setText("Start Recording");
+                    recordButton.setBackgroundResource(R.drawable.green_button);
+                    trackRecording = false;
+                }
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), "Not Connected", Toast.LENGTH_LONG);
+                toast.show();
+            }
+        }
+    }
+
+    public class StartTrackListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            if(connected){
+                for (final String command:trackCommands ){
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                //for (int i = 0;i < 10;i++)
+                                    sendChar(command);
+                                Log.d("TRACK",command);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, 10);
+                }
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), "Not Connected", Toast.LENGTH_LONG);
+                toast.show();
             }
         }
     }
 
     public void setBoolean(View v, Boolean bool){
         if(v.getId() == R.id.buttonF){
-            Forward = bool;
+            forward = bool;
         }
         else if(v.getId() == R.id.buttonB){
-            Back = bool;
+            back = bool;
         }
         else if(v.getId() == R.id.buttonL){
-            Left = bool;
+            left = bool;
         }
         else if(v.getId() == R.id.buttonR){
-            Right = bool;
+            right = bool;
         }
         else if(v.getId() == R.id.buttonFL){
             FL = bool;
@@ -306,25 +373,30 @@ public class ButtonsActivity extends AppCompatActivity {
     public void controlCar() {
         if (connectButton.getText().equals("Disconnect")) {
             try {
-                if (Forward) {
-                    sendChar(Utility.FORWARD);
-                } else if (Back) {
-                    sendChar(Utility.BACK);
-                } else if (Left) {
-                    sendChar(Utility.LEFT);
-                } else if (Right) {
-                    sendChar(Utility.RIGHT);
+                String charToSend;
+                if (forward) {
+                    charToSend = Utility.FORWARD;
+                } else if (back) {
+                    charToSend = Utility.BACK;
+                } else if (left) {
+                    charToSend = Utility.LEFT;
+                } else if (right) {
+                    charToSend = Utility.RIGHT;
                 } else if (FL) {
-                    sendChar(Utility.FORWARD_LEFT);
+                    charToSend = Utility.FORWARD_LEFT;
                 } else if (FR) {
-                    sendChar(Utility.FORWARD_RIGHT);
+                    charToSend = Utility.FORWARD_RIGHT;
                 } else if (BL) {
-                    sendChar(Utility.BACK_LEFT);
+                    charToSend = Utility.BACK_LEFT;
                 } else if (BR) {
-                    sendChar(Utility.BACK_RIGHT);
+                    charToSend = Utility.BACK_RIGHT;
                 } else {
-                    sendChar(Utility.STOP);
+                    charToSend = Utility.STOP;
                 }
+                sendChar(charToSend);
+                Log.d("TRACK","Recording: "+charToSend);
+                if (trackRecording)
+                    trackCommands.add(charToSend);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -340,10 +412,10 @@ public class ButtonsActivity extends AppCompatActivity {
     }
 
     public void reset(){
-        Forward = false;
-        Back = false;
-        Left = false;
-        Right = false;
+        forward = false;
+        back = false;
+        left = false;
+        right = false;
         FL = false;
         FR = false;
         BL = false;

@@ -16,7 +16,6 @@ public class Utility {
         if (mmOutputStream != null){
             byte[] msgBuffer = signal.getBytes();
             try {
-                for ( int i = 0;i < 20;i++)
                     mmOutputStream.write(msgBuffer);
             } catch (IOException e) {
                 e.printStackTrace();

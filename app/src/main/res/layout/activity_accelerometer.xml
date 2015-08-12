@@ -28,19 +28,19 @@
                 android:id="@+id/circleFL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_circle_off"
+                android:background="@drawable/circle_off"
                 android:layout_margin="5dp"/>
             <ImageView
                 android:id="@+id/circleF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_circle_off"
+                android:background="@drawable/circle_off"
                 android:layout_margin="5dp"/>
             <ImageView
                 android:id="@+id/circleFR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_circle_off"
+                android:background="@drawable/circle_off"
                 android:layout_margin="5dp"/>
         </LinearLayout>
         <LinearLayout
@@ -53,19 +53,19 @@
                 android:id="@+id/circleL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_circle_off"
+                android:background="@drawable/circle_off"
                 android:layout_margin="5dp"/>
             <ImageView
                 android:id="@+id/circleS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_circle_off"
+                android:background="@drawable/circle_off"
                 android:layout_margin="5dp"/>
             <ImageView
                 android:id="@+id/circleR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_circle_off"
+                android:background="@drawable/circle_off"
                 android:layout_margin="5dp"/>
         </LinearLayout>
         <LinearLayout
@@ -78,19 +78,19 @@
                 android:id="@+id/circleBL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_circle_off"
+                android:background="@drawable/circle_off"
                 android:layout_margin="5dp"/>
             <ImageView
                 android:id="@+id/circleB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_circle_off"
+                android:background="@drawable/circle_off"
                 android:layout_margin="5dp"/>
             <ImageView
                 android:id="@+id/circleBR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_circle_off"
+                android:background="@drawable/circle_off"
                 android:layout_margin="5dp"/>
         </LinearLayout>
     </LinearLayout>

@@ -2,4 +2,6 @@
 <resources>
     <color name="white">#FFFFFF</color>
     <color name="green">#ff0dc642</color>
+    <color name="actionBar">#3F51B5</color>
+
 </resources>

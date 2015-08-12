@@ -1,16 +1,17 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="eg.edu.asu.eng.walle.testcar.FullControlActivity" >
+    tools:context="eg.edu.asu.eng.walle.testcar.ButtonsActivity" >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <Button
             android:id="@+id/connectButton"
-            android:textColor="@color/white"
-            android:layout_margin="10dp"
+            style="@style/ButtonText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/blue_button"
@@ -18,128 +19,142 @@
             android:text="@string/connectButton"
             android:textSize="20sp"
             android:layout_gravity="center"/>
-            <LinearLayout
-                android:id="@+id/top_layout"
-                android:layout_below="@id/connectButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_alignLeft="@+id/bottom_layout"
-                android:layout_alignRight="@id/bottom_layout"
-                android:layout_centerHorizontal="true">
-                <Button
-                    android:id="@+id/buttonFL"
-                    android:textColor="@color/white"
-                    android:layout_margin="10dp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/blue_button"
-                    android:text="@string/buttonFL"
-                    android:layout_weight="1"
-                    />
-                <Button
-                    android:id="@+id/buttonF"
-                    android:textColor="@color/white"
-                    android:layout_margin="10dp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/blue_button"
-                    android:text="@string/buttonF"
-                    android:layout_weight="1"
-                    />
-                <Button
-                    android:id="@+id/buttonFR"
-                    android:textColor="@color/white"
-                    android:layout_margin="10dp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/blue_button"
-                    android:text="@string/buttonFR"
-                    android:layout_weight="1"
-                    />
-                </LinearLayout>
-                <Button
-                    android:id="@+id/buttonL"
-                    android:textColor="@color/white"
-                    android:layout_margin="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/top_layout"
-                    android:layout_alignLeft="@id/bottom_layout"
-                    android:background="@drawable/blue_button"
-                    android:text="@string/buttonL"
-                    />
-
-                <Button
-                    android:id="@+id/buttonR"
-                    android:textColor="@color/white"
-                    android:layout_margin="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/top_layout"
-                    android:layout_alignRight="@id/bottom_layout"
-                    android:background="@drawable/blue_button"
-                    android:text="@string/buttonR"
-                    />
-            <LinearLayout
-                android:id="@+id/bottom_layout"
-                android:layout_below="@id/buttonR"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_centerHorizontal="true">
-                <Button
-                    android:id="@+id/buttonBL"
-                    android:textColor="@color/white"
-                    android:layout_margin="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/blue_button"
-                    android:text="@string/buttonBL"
-                    />
-
-                <Button
-                    android:id="@+id/buttonB"
-                    android:textColor="@color/white"
-                    android:layout_margin="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/blue_button"
-                    android:text="@string/buttonB"
-                    />
-                <Button
-                    android:id="@+id/buttonBR"
-                    android:textColor="@color/white"
-                    android:layout_margin="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/blue_button"
-                    android:text="@string/buttonBR"
-                    />
-            </LinearLayout>
-
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enable Tracking"
-            android:id="@+id/EnLineTracking"
-            android:textColor="@color/white"
-            android:layout_below="@id/bottom_layout"
-            android:layout_marginLeft="100dp"
-            android:background="@drawable/blue_button"/>
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <Button
+                android:id="@+id/buttonFL"
+                style="@style/ButtonText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_button"
+                android:text="@string/buttonFL"
+                android:layout_weight="1"
+                />
 
-        <Button
-            android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/buttonF"
+                style="@style/ButtonText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_button"
+                android:text="@string/buttonF"
+                android:layout_weight="1"
+                />
+            <Button
+                android:id="@+id/buttonFR"
+                style="@style/ButtonText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_button"
+                android:text="@string/buttonFR"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Disable Tracking"
-            android:id="@+id/DisLineTracking"
-            android:textColor="@color/white"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <Button
+                android:id="@+id/buttonL"
+                style="@style/ButtonText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_button"
+                android:text="@string/buttonL"
+                android:layout_weight="1"
+                />
+
+            <Button
+                android:id="@+id/buttonRecord"
+                style="@style/ButtonText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/green_button"
+                android:text="@string/buttonRecord"
+                android:layout_weight="1"
+                />
+            <Button
+                android:id="@+id/buttonR"
+                style="@style/ButtonText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_button"
+                android:text="@string/buttonR"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <Button
+                android:id="@+id/buttonBL"
+                style="@style/ButtonText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_button"
+                android:text="@string/buttonBL"
+                android:layout_weight="1"
+                />
+
+            <Button
+                android:id="@+id/buttonB"
+                style="@style/ButtonText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_button"
+                android:text="@string/buttonB"
+                android:layout_weight="1"
+                />
+            <Button
+                android:id="@+id/buttonBR"
+                style="@style/ButtonText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_button"
+                android:text="@string/buttonBR"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/EnLineTracking"
+                style="@style/ButtonText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_button"
+                android:text="@string/EnLineTracking"
+                android:layout_weight="1"
+                />
+            <Button
+                android:id="@+id/DisLineTracking"
+                style="@style/ButtonText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_button"
+                android:text="@string/DisLineTracking"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+        <Button
+            android:id="@+id/buttonTrack"
+            style="@style/ButtonText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/blue_button"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/EnLineTracking"
-            android:layout_toEndOf="@+id/EnLineTracking"
-            android:layout_marginLeft="49dp"
-            android:layout_marginStart="49dp" />
-
-    </RelativeLayout>
+            android:onClick="connect"
+            android:text="@string/buttonTrack"
+            android:textSize="20sp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
 </ScrollView>

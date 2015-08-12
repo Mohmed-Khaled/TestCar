@@ -390,8 +390,8 @@ public class AccelerometerActivity extends AppCompatActivity implements SensorEv
 
     public void turnON(int index){
         for (ImageView circle : circles) {
-            circle.setImageResource(R.drawable.blue_circle_off);
+            circle.setImageResource(R.drawable.circle_off);
         }
-        circles[index].setImageResource(R.drawable.blue_circle_on);
+        circles[index].setImageResource(R.drawable.circle_on);
     }
 }
